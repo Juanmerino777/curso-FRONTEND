@@ -1,0 +1,27 @@
+ETIQUETAS SEMANTICAS:
+
+HEADER_(Encabezamiento) se utiliza para marcar la sección superior de una página web, que normalmente incluye el título o logotipo principal, enlaces de navegación y otros elementos que son comunes a todas las páginas del sitio.
+
+NAV_(Navegación)  se utiliza para marcar una sección de una página web que contiene enlaces de navegación.
+
+MAIN_(Primcipal) se utiliza para marcar el área de contenido principal de una página web.
+
+ARTICLE_(Articulo)  se utiliza para representar un contenido independiente, como una publicación de blog, un artículo de noticias o una reseña de un producto.
+
+ASIDE_(Aparte) se utiliza para marcar contenido relacionado con el contenido principal de una página web pero que no forma parte integral de ella. 
+
+SECCTION_(Sección) se utiliza para marcar secciones de una página web que están agrupadas temáticamente.
+
+FOOTER_(Pie de pagina)  se utiliza para marcar la sección inferior de una página web, que puede incluir elementos como información de derechos de autor, detalles de contacto o enlaces a perfiles de redes sociales.
+
+DETAILS Y SUMMARY_(DETALLES Y RESUMEN) se utilizan para marcar una sección plegable de contenido. La etiqueta <summary> se utiliza para marcar el título de la sección y la etiqueta <details> se utiliza para marcar el contenido en sí.
+
+FIGURE Y FIGCAPTION_(FIGURA Y LEYENDA) se utilizan para marcar un contenido autónomo al que se hace referencia desde el contenido principal de una página web. La etiqueta <figure> se utiliza para marcar el contenido en sí y la etiqueta <figcaption> se utiliza para marcar un título o descripción del contenido.
+
+MARK_(MARCA) se utiliza para marcar texto que se ha resaltado por algún motivo. Esto podría incluir cosas como resultados de búsqueda o texto resaltado por un usuario.
+
+TIME_(TIEMPO)  se utiliza para marcar una fecha u hora. Al utilizar la etiqueta <time>, puede facilitar que los motores de búsqueda y otras tecnologías comprendan el significado del contenido de su página.
+
+PROGRESS_(PROGRESO) se utiliza para marcar una barra de progreso. Al utilizar la etiqueta <progress>, puede facilitar que los usuarios comprendan el progreso de una tarea.
+
+DIV Y SPAN_ no son etiquetas semánticas. Se utilizan para marcar áreas de contenido genérico y no transmiten ningún significado específico.
