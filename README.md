@@ -1,1 +1,1 @@
-Este es un curso FRONT-END en ejecución en la pagina  ROADMAP
+Este es un seguimiento del aprendizaje obtenido como desarrollador FRON-END 
