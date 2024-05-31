@@ -1,0 +1,420 @@
+VALIDACIÓN DE FORMULARIO DEL LADO DE CLIENTE:
+Antes de enviar datos al servidor, es importante asegurarse de que se completen todos los controles del formulario requeridos en el formato correcto. Esto se denomina validación de formulario del lado del cliente y ayuda a garantizar que los datos enviados coincidan con los requisitos establecidos en los distintos controles del formulario.
+
+¿QUE ES LA VALIDACIÓN DE FORMULARIOS_
+EJEMPLOS:
+* "Este campo es obligatorio" (No puede dejar este campo en blanco).
+* "Por favor ingresa tu número de teléfono en el formato xxx-xxxx" (Se requiere un formato de datos  específico para que se considere válido).
+* "Ingrese una dirección de correo electrónico válida" (los datos que ingresó no están en el formato correcto).
+* "Su contraseña debe tener entre 8 y 30 caracteres y contener una letra mayúscula, un símbolo y un número". (Se requiere un formato de datos muy específico para sus datos).
+
+Cuando ingresas datos, el navegador y/o el servidor web verificarán que los datos estén en el formato correcto y dentro de las restricciones establecidas por la aplicación. La validación realizada en el navegador se denomina validación del lado del cliente , mientras que la validación realizada en el servidor se denomina validación del lado del servidor .
+
+Si la información tiene el formato correcto, la aplicación permite que los datos se envíen al servidor y (normalmente) se guarden en una base de datos; si la información no tiene el formato correcto, le muestra al usuario un mensaje de error que explica lo que debe corregirse y le permite volver a intentarlo.
+
+
+HAY DOS TIPOS DE VALIDACIÓN DE FORMULARIOS:
+
+LA VALIDACION INTEGRADA:
+utiliza funciones de validación de formularios HTML, pero no es tan personalizable. Esta validación generalmente no requiere mucho JavaScript.
+VALIDACION DE JAVASCRIPT: se codifica mediante JavaScript. Esta validación es completamente personalizable, pero debe crearla toda (o usar una biblioteca).
+
+
+ATRIBUTOS DE VALIDACIÓN:
+* required: Especifica si es necesario completar un campo del formulario antes de poder enviar el formulario.
+* minlength y maxlength: Especifica la longitud mínima y máxima de los datos textuales (cadenas).
+* min y max: Especifica los valores mínimo y máximo de los tipos de entrada numérica.
+* type: Especifica si los datos deben ser un número, una dirección de correo electrónico o algún otro tipo preestablecido específico.
+* pattern: Especifica una expresión regular que define un patrón que deben seguir los datos ingresados.
+
+Si los datos ingresados ​​en un campo de formulario siguen todas las reglas especificadas por los atributos anteriores, se considera válido. En caso contrario, se considera inválido.
+
+Cuando un elemento es válido:
+El elemento coincide con la pseudoclase CSS:valid, que le permite aplicar un estilo específico a elementos válidos.
+Si el usuario intenta enviar los datos, el navegador enviará el formulario, siempre que no haya nada que lo impida.
+
+Cuando un elemento no es válido:
+El elemento coincide con la pseudoclase CSS :invalid y, a veces, con otras pseudoclases de UI (p. ej.,:out-of-range ) según el error, lo que le permite aplicar un estilo específico a elementos no válidos.
+Si el usuario intenta enviar los datos, el navegador bloqueará el formulario y mostrará un mensaje de error.
+Hay varios errores que impedirán que se envíe el formulario, incluido un
+badInput, patternMismatch o rangeOverflow, rangeUnderflow, stepMismatch, tooLong, tooShort, typeMismatch, valueMissing, customError
+
+Ejemplos de validación de formularios :
+
+HTML:
+<form>
+  <label for="choose">Would you prefer a banana or cherry?</label>
+  <input id="choose" name="i-like" required />
+  <button>Submit</button>
+</form>
+
+CSS:
+input:invalid {
+  border: 2px dashed red;
+}
+
+input:valid {
+  border: 2px solid black;
+}
+
+En el anterior ejemplo tenemos un formulario simple donde validamos el atributo required.  Para que una entrada sea obligatoria, agregue este atributo al elemento. Cuando se establece este atributo, el elemento coincide con la :requiredpseudoclase de la interfaz de usuario y el formulario no se enviará, mostrando un mensaje de error al enviarlo cuando la entrada está vacía. Mientras esté vacía, la entrada también se considerará no válida y coincidirá con la :invalidpseudoclase de la interfaz de usuario.
+
+
+VALIDACION CON EXPRECIÓN REGULAR:
+Otra característica de validación útil es el atributo pattern, que espera una expresión regular como valor. Es un patrón que se puede usar para hacer coincidir combinaciones de caracteres en cadenas de texto, por lo que las expresiones regulares son ideales para la validación de formularios y sirven para una variedad de otros usos en JavaScript.
+
+EJEMPLO:
+<form>
+  <label for="choose">Would you prefer a banana or a cherry?</label>
+  <input id="choose" name="i-like" required pattern="[Bb]anana|[Cc]herry" />
+  <button>Submit</button>
+</form>
+
+En este ejemplo, el <input>elemento acepta uno de cuatro valores posibles: las cadenas "banana", "Banana", "cherry" o "Cherry". Las expresiones regulares distinguen entre mayúsculas y minúsculas, pero hemos hecho que admitan versiones en mayúsculas y minúsculas utilizando un patrón "Aa" adicional anidado entre corchetes.
+Si un valor no vacío de <input> no coincide con el patrón de la expresión regular, input coincidirá con la pseudoclase :invalid.
+
+Nota: Algunos tipos de elementos <input> no necesitan que un atributo pattern se valide con una expresión regular. Al especificar el tipo email, por ejemplo, se valida el valor de las entradas con respecto a un patrón de dirección de correo electrónico bien formado o un patrón que coincida con una lista de direcciones de correo electrónico separadas por comas si tiene el atributo multiple.
+
+Nota: El elemento <textarea> no admite el atributo pattern.
+
+RESTRINGIR LA LONGITUD:
+Puede restringir la longitud de caracteres de todos los campos de texto creados mediante <input> o <textarea> utilizando los atributos minlength y maxlength. Un campo no es válido si tiene un valor y ese valor tiene menos caracteres que el valor minlength o más que el valor maxlength.
+
+RESTRINGIR POR VALOR:
+Para campos numéricos ( <input type="number"> ), los atributos min y max se pueden utilizar para proporcionar un rango de valores válidos. Si el campo contiene un valor fuera de este rango, no será válido.
+
+EJEMPLO:
+HTML:
+<form>
+  <div>
+    <label for="choose">Would you prefer a banana or a cherry?</label>
+    <input type="text" id="choose" name="i-like" required minlength="6" maxlength="6"/>
+  </div>
+  <div>
+    <label for="number">How many would you like?</label>
+    <input type="number" id="number" name="amount" value="1" min="1" max="10" />
+  </div>
+  <div>
+    <button>Submit</button>
+  </div>
+</form>
+
+Aquí verás que le hemos dado al campo text un minlength y maxlength de 6, que tiene la misma longitud que el plátano y la cereza.
+También le hemos dado al campo NUMBER una min de uno y una max de 10. Los números ingresados ​​fuera de este rango se mostrarán como no válidos; los usuarios no podrán usar las flechas de incremento/disminución para mover el valor fuera de este rango. Si el usuario ingresa manualmente un número fuera de este rango, los datos no son válidos. El número no es obligatorio, por lo que eliminar el valor dará como resultado un valor válido.
+
+Nota: <input type="number"> (y otros tipos, como rangey date) también pueden tomar un stepatributo, que especifica en qué incremento aumentará o disminuirá el valor cuando se utilicen los controles de entrada (como los botones numéricos de arriba y abajo). En el ejemplo anterior no hemos incluido ningún stepatributo, por lo que el valor predeterminado es 1. Esto significa que los flotantes, como 3.2, también se mostrarán como no válidos.
+
+
+
+VALIDACION DE FORMULARIOS CON JAVASCRIPT:
+
+CON API:
+La API de validación de restricciones consta de un conjunto de métodos y propiedades disponibles en las siguientes interfaces DOM de elementos de formulario:
+
+METODOS:
+* HTMLButtonElement (representa un <button>elemento)
+* HTMLFieldSetElement (representa un <fieldset>elemento)
+* HTMLInputElement (representa un <input>elemento)
+* HTMLOutputElement (representa un <output>elemento)
+* HTMLSelectElement (representa un <select>elemento)
+* HTMLTextAreaElement (representa un <textarea>elemento)
+
+PROPIEDADES:
+* validationMessage: Devuelve un mensaje localizado que describe las restricciones de validación que el control no satisface (si corresponde). Si el control no es candidato para la validación de restricciones ( willValidate es false) o el valor del elemento satisface sus restricciones (es válido), esto devolverá una cadena vacía.
+
+* validity: Devuelve un objeto ValidityState que contiene varias propiedades que describen el estado de validez del elemento. Puede encontrar detalles completos de todas las propiedades disponibles en la página ValidityState de referencia; A continuación se enumeran algunos de los más comunes:
+
+-- patternMismatch: Devuelve true si el valor no coincide con el especificado pattern y false si coincide. Si es verdadero, el elemento coincide con la pseudoclase CSS :invalid.
+
+-- tooLong: Devuelve true si el valor es mayor que la longitud máxima especificada por el atributo maxlength, o false si es menor o igual al máximo. Si es verdadero, el elemento coincide con la pseudoclase CSS :invalid.
+
+-- tooShort: Devuelve true si el valor es más corto que la longitud mínima especificada por el atributo minlength, o false si es mayor o igual al mínimo. Si es verdadero, el elemento coincide con la pseudoclase CSS :invalid.
+
+-- rangeOverflow: Devuelve true si el valor es mayor que el máximo especificado por el atributo max, o false si es menor o igual al máximo. Si es verdadero, el elemento coincide con las pseudoclases CSS :invalid y :out-of-range.
+
+-- rangeUnderflow: Devuelve true si el valor es menor que el mínimo especificado por el atributo min, o false si es mayor o igual al mínimo. Si es verdadero, el elemento coincide con las pseudoclases CSS :invalid y :out-of-range.
+
+-- typeMismatch: Devuelve true si el valor no está en la sintaxis requerida (cuando type es email o url), o false si la sintaxis es correcta. Si true, el elemento coincide con la pseudoclase CSS :invalid.
+
+-- valid: Devuelve true si el elemento cumple con todas sus restricciones de validación y, por lo tanto, se considera válido, o false si no cumple con alguna restricción. Si es verdadero, el elemento coincide con la pseudoclase CSS :valid; de lo contrario, la pseudoclase CSS :invalid.
+
+-- valueMissing: Devuelve true si el elemento tiene un atributo required, pero ningún valor, o false en caso contrario. Si es verdadero, el elemento coincide con la pseudoclase CSS :invalid.
+
+-- willValidate: Devuelve true si el elemento será validado cuando se envíe el formulario; o false de lo contrario.
+
+
+La API de validación de restricciones también hace que los siguientes métodos estén disponibles en los elementos anteriores y en el formelemento.
+
+-- checkValidity(): Devuelve true si el valor del elemento no tiene problemas de validez; false de lo contrario. Si el elemento no es válido, este método también activa un evento invalid en el elemento.
+
+-- reportValidity(): Informa campos no válidos mediante eventos. Este método es útil en combinación con preventDefault() un controlador de eventos onSubmit.
+
+--setCustomValidity(message): Agrega un mensaje de error personalizado al elemento; Si configura un mensaje de error personalizado, el elemento se considera no válido y se muestra el error especificado. Esto le permite utilizar código JavaScript para establecer un error de validación distinto de los ofrecidos por las restricciones de validación HTML estándar. El mensaje se muestra al usuario cuando informa el problema.
+
+EJEMPLO SIMPLE:
+
+HTML:
+<form>
+  <label for="mail">
+    I would like you to provide me with an email address:
+  </label>
+  <input type="email" id="mail" name="mail" />
+  <button>Submit</button>
+</form>
+
+JAVASCRIPT:
+const email = document.getElementById("mail");
+
+email.addEventListener("input", (event) => {
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity("I am expecting an email address!");
+  } else {
+    email.setCustomValidity("");
+  }
+});
+
+Aquí almacenamos una referencia a la entrada del correo electrónico y luego le agregamos un detector de eventos que ejecuta el código contenido cada vez que se cambia el valor dentro de la entrada.
+
+Dentro del código contenido, verificamos si la propiedad validity.typeMismatch de entrada del correo electrónico devuelve true, lo que significa que el valor contenido no coincide con el patrón de una dirección de correo electrónico bien formada. Si es así, llamamos al método setCustomValidity() con un mensaje personalizado. Esto hace que la entrada no sea válida, de modo que cuando intenta enviar el formulario, el envío falla y se muestra el mensaje de error personalizado.
+
+Si la propiedad validity.typeMismatch devuelve false, llamamos al método setCustomValidity() con una cadena vacía. Esto hace que la entrada sea válida, por lo que se enviará el formulario.
+
+EJEMPLO DETALLADO:
+
+HTML:
+<form novalidate>
+  <p>
+    <label for="mail">
+      <span>Please enter an email address:</span>
+      <input type="email" id="mail" name="mail" required minlength="8" />
+      <span class="error" aria-live="polite"></span>
+    </label>
+  </p>
+  <button>Submit</button>
+</form>
+
+
+CSS:
+body {
+  font: 1em sans-serif;
+  width: 200px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+p * {
+  display: block;
+}
+
+input[type="email"] {
+  appearance: none;
+
+  width: 100%;
+  border: 1px solid #333;
+  margin: 0;
+
+  font-family: inherit;
+  font-size: 90%;
+
+  box-sizing: border-box;
+}
+
+/* This is our style for the invalid fields */
+input:invalid {
+  border-color: #900;
+  background-color: #fdd;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+/* This is the style of our error messages */
+.error {
+  width: 100%;
+  padding: 0;
+
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+  border-radius: 0 0 5px 5px;
+
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
+}
+
+
+JAVASCRIPT:
+const form = document.querySelector("form");
+const email = document.getElementById("mail");
+const emailError = document.querySelector("#mail + span.error");
+
+email.addEventListener("input", (event) => {
+  if (email.validity.valid) {
+    emailError.textContent = "";
+    emailError.className = "error";
+  } else {
+    showError();
+  }
+});
+
+form.addEventListener("submit", (event) => {
+  if (!email.validity.valid) {
+    showError();
+    event.preventDefault();
+  }
+});
+
+function showError() {
+  if (email.validity.valueMissing) {
+    emailError.textContent = "You need to enter an email address.";
+  } else if (email.validity.typeMismatch) {
+    emailError.textContent = "Entered value needs to be an email address.";
+  } else if (email.validity.tooShort) {
+    emailError.textContent = `Email should be at least ${email.minLength} characters; you entered ${email.value.length}.`;
+  }
+  emailError.className = "error active";
+}
+
+
+Este formulario simple utiliza el atributo novalidate para desactivar la validación automática del navegador; esto permite que el script tome el control de la validación. Sin embargo, esto no desactiva la compatibilidad con la API de validación de restricciones ni la aplicación de pseudoclases CSS como :valid.
+
+Nuestro input para validar es un <input type="email">, que es required y tiene un minlength de 8 caracteres.
+
+el objetivo es mostrar los mensajes de error dentro de un elemento <span>. El atributo aria-live se establece en ese <span> para garantizar que nuestro mensaje de error personalizado se presente a todos, incluida la lectura en voz alta a los usuarios de lectores de pantalla.
+
+Un punto clave es que configurar el atributo novalidate en el formulario esto evita que el formulario muestre sus propias burbujas de mensajes de error y, en su lugar, nos permite mostrar los mensajes de error personalizados en el DOM de la manera que elijamos.
+
+Cada vez que cambiamos el valor de la entrada, verificamos si contiene datos válidos. Si es así, eliminamos cualquier mensaje de error que se muestre. Si los datos no son válidos, ejecutamos showError() para mostrar el error correspondiente. 
+
+Cada vez que intentamos enviar el formulario, comprobamos nuevamente si los datos son válidos. Si es así, dejamos que se envíe el formulario. De lo contrario, ejecutamos showError() para mostrar el error correspondiente y detenemos el envío del formulario con preventDefault().
+
+La función showError() utiliza varias propiedades del objeto de entrada validity para determinar cuál es el error y luego muestra un mensaje de error según corresponda.
+
+
+
+VALIDACION DE FORMULARIOS SIN API:
+antes que todo debemos preguntarnos.
+¿Qué tipo de validación debo realizar?
+¿Qué debo hacer si el formulario no se valida?
+¿Cómo puedo ayudar al usuario a corregir datos no válidos?
+
+
+EJEMPLO:
+HTML:----------------------
+El HTML es casi el mismo; Acabamos de eliminar las funciones de validación de HTML.
+
+
+<form>
+  <p>
+    <label for="mail">
+      <span>Please enter an email address:</span>
+      <input type="text" id="mail" name="mail" />
+      <span class="error" aria-live="polite"></span>
+    </label>
+  </p>
+  <button>Submit</button>
+</form>
+
+
+CSS:-----------------------
+De manera similar, el CSS no necesita cambiar mucho; Acabamos de convertir la pseudoclase CSS :invalid en una clase real y evitamos usar el selector de atributos.
+
+
+body {
+  font: 1em sans-serif;
+  width: 200px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+form {
+  max-width: 200px;
+}
+
+p * {
+  display: block;
+}
+
+input#mail {
+  appearance: none;
+  width: 100%;
+  border: 1px solid #333;
+  margin: 0;
+
+  font-family: inherit;
+  font-size: 90%;
+
+  box-sizing: border-box;
+}
+
+/* This is our style for the invalid fields */
+input.invalid {
+  border-color: #900;
+  background-color: #fdd;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+/* This is the style of our error messages */
+.error {
+  width: 100%;
+  padding: 0;
+
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+  border-radius: 0 0 5px 5px;
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
+}
+
+
+Los grandes cambios están en el código JavaScript, que necesita hacer mucho más trabajo pesado.
+
+JAVASCRIPT:----------------
+
+const form = document.querySelector("form");
+const email = document.getElementById("mail");
+const error = email.nextElementSibling;
+
+const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+window.addEventListener("load", () => {
+  const isValid = email.value.length === 0 || emailRegExp.test(email.value);
+  email.className = isValid ? "valid" : "invalid";
+});
+
+email.addEventListener("input", () => {
+  const isValid = email.value.length === 0 || emailRegExp.test(email.value);
+  if (isValid) {
+    email.className = "valid";
+    error.textContent = "";
+    error.className = "error";
+  } else {
+    email.className = "invalid";
+  }
+});
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const isValid = email.value.length === 0 || emailRegExp.test(email.value);
+  if (!isValid) {
+    email.className = "invalid";
+    error.textContent = "I expect an email, darling!";
+    error.className = "error active";
+  } else {
+    email.className = "valid";
+    error.textContent = "";
+    error.className = "error";
+  }
+});
