@@ -1,0 +1,52 @@
+-Accesdibilidad en botones y enlaces:
+Los botones y enlaces son tipos específicos de componentes interactivos. Cada uno de ellos trabaja de manera diferente con las tecnologías de asistencia. El uso correcto de cada componente ayuda a los usuarios con tecnologías de asistencia a interactuar con el componente.
+
+--Como?:
+El elemento <button> debe usarse para cualquier interacción que realice una acción en la página actual. El elemento <a> debe usarse para cualquier interacción que navegue a otra vista.
+
+Enlaces adecuados
+Los enlaces llevan a los usuarios de una página a otra o, en ocasiones, a otra parte de la página. Para que un enlace sea accesible, recuerde:
+
+* Utilice el atributo href para especificar el destino del enlace.
+* Utilice una URL adecuada en el atributo href. La URL puede ser absoluta o relativa.
+  EJ: https://uber.com/about es una URL absoluta. /about es una URL relativa.
+* No simular un vínculo con otros elementos como <span> o <div>.
+* Abra el enlace en la ventana actual. No se recomienda abrir enlaces en una ventana nueva .
+ 
+
+
+-Accesdibilidad en imagenes:
+
+Algunas imágenes son significativas y otras son decorativas. Esta es una distinción importante en términos de accesibilidad. Cada imagen debe codificarse como significativa o decorativa.
+
+--Porque?
+Los lectores de pantalla ignorarán las imágenes decorativas. Los lectores de pantalla intentarán expresar el significado de una imagen significativa.
+
+
+--Imágenes decorativas
+Si una imagen no es importante para que un usuario comprenda la funcionalidad o el contenido de una página web o aplicación, se considera decorativa. ¿Puedes quitarla sin impacto? Entonces es una imagen decorativa.
+
+Atributo alternativo vacío
+La forma básica de configurar una imagen como decorativa es utilizar un atributo (alt) vacío.
+
+<img src="Ha50044a356.jpg" alt="">
+
+Las tecnologías de asistencia, como un lector de pantalla, ignorarán la imagen. Sin el atributo (alt) vacío, un lector de pantalla puede leer el nombre del archivo. Esto no tendrá sentido y confundirá al usuario.
+
+--Imágenes de fondo
+Otro método para imágenes decorativas es agregarlas usando la propiedad CSS background-image . Esto es común cuando creamos imágenes de héroes (imagenes con descripcciones encima).
+
+tenemos cinco enlaces que son combinaciones de íconos y texto: Inicio , Feeds , Messenger , Carrito y Mi App . Dado que el sitio sigue siendo legible si eliminamos los iconos, son decorativos. Los íconos se crean con íconos de fuentes. Sin elemento <img> ni imagen de fondo. Añadir role="img" y aria-hidden="true":
+
+<i class="navbarIcon" role="img" aria-hidden="true"></i>
+
+Con este código, agregamos algo de semántica al rol de imagen <i>. Los agentes de usuario ahora entienden que se trata de una imagen. Los lectores de pantalla también entienden que deben ignorar la imagen.
+
+--Imágenes SVG en línea
+Si agrega una imagen SVG decorativa con el elemento <img>, debe agregar un atributo (alt) vacío. Las imágenes SVG a menudo se insertan en línea, utilizando el elemento <svg>. En este caso, aria-hidden="true" tu imagen será decorativa.
+
+<svg aria-hidden="true" …></svg>
+
+El atributo (alt) proporciona un texto alternativo para una imagen, si el usuario por algún motivo no puede verla. El motivo puede ser una conexión lenta, un error con el archivo de imagen o si el usuario utiliza un lector de pantalla. El valor del atributo alt debe describir la imagen, o mejor aún: la intención de la imagen.
+
+< img src ="MyApp-logo.svg" alt ="Inicio de MyApp" >
