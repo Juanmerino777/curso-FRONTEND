@@ -1,1 +1,1 @@
-Este es un seguimiento del aprendizaje obtenido como desarrollador FRON-END 
+This is a learning repository about the INTERNET
